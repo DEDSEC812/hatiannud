@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haitian Nud </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+/* LOADER */
+#loader{
+position:fixed;width:100%;height:100vh;
+background:#0f0f0f;display:flex;justify-content:center;align-items:center;flex-direction:column;
+color:white;z-index:9999;
+}
+.loader-circle{
+width:60px;height:60px;
+border:6px solid #333;border-top:6px solid #00ffcc;
+border-radius:50%;animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* MAIN */
+#main{
+display:none;
+min-height:100vh;
+background:linear-gradient(135deg,#0f0f0f,#1c1c1c);
+color:white;padding-bottom:40px;
+}
+
+/* HEADER */
+header{text-align:center;padding:40px 20px 20px;}
+header img{
+width:70px;
+max-width:70px;
+height:auto;
+border-radius:50%;
+border:2px solid #00ffcc;
+margin-bottom:15px;
+}
+header h1{font-size:26px;font-weight:700;color:#00ffcc;}
+header p{margin-top:8px;font-size:14px;color:#bbb;max-width:280px;margin:auto;}
+
+/* SECTION */
+.section{margin-top:30px;padding:0 20px;}
+.section h2{text-align:center;margin-bottom:12px;font-size:18px;color:#00ffcc;}
+
+/* LINKS */
+.link-box{display:flex;flex-direction:column;gap:10px;}
+.link-box a{
+text-decoration:none;
+padding:12px;
+border-radius:8px;
+background:#1f1f1f;
+text-align:center;
+color:white;
+font-weight:500;
+transition:0.3s ease;
+border:1px solid #333;
+}
+.link-box a:hover{
+background:#00ffcc;
+color:black;
+transform:scale(1.05);
+}
+
+/* SOCIAL */
+.social-links{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:25px;
+}
+.social-links a{
+background:#1f1f1f;
+padding:10px;
+border-radius:50%;
+border:1px solid #333;
+transition:0.3s ease;
+}
+.social-links a:hover{
+background:#00ffcc;
+transform:scale(1.1);
+}
+.social-links img{
+width:28px;
+height:28px;
+}
+
+/* FOOTER */
+footer{
+margin-top:30px;
+text-align:center;
+font-size:12px;
+color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+<div class="loader-circle"></div>
+<p style="margin-top:12px;">Chargement...</p>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<header>
+<img src="/logo.png" alt="Logo Haitian Network">
+<h1>Haitian Nud</h1>
+<p>Plateforme officielle pour rejoindre nos canaux et groupes exclusifs.</p>
+</header>
+
+<!-- CANAUX -->
+<div class="section">
+<h2>📢 Nos 3 Canaux</h2>
+<div class="link-box">
+<a href="https://t.me/fans_haitian_nudx" target="_blank">Canal Premium 1</a>
+<a href="https://t.me/african_black_porno" target="_blank">Canal Premium 2</a>
+<a href="https://t.me/haitianpie_zen" target="_blank">Canal Premium 3</a>
+</div>
+</div>
+
+<!-- GROUPES -->
+<div class="section">
+<h2>👥 Nos 4 Groupes</h2>
+<div class="link-box">
+<a href="https://t.me/hai_tian_nud_x" target="_blank">Groupe VIP 1</a>
+<a href="https://t.me/haitian_nud_x1" target="_blank">Groupe VIP 2</a>
+<a href="https://t.me/africanblack_porno" target="_blank">Groupe VIP 3</a>
+<a href="https://t.me/your_dark_group_18" target="_blank">Groupe Dark 18+</a>
+</div>
+</div>
+
+<!-- CONTACT PDG -->
+<div class="section">
+<h2>⭐ Contact PDG</h2>
+<div class="link-box">
+<a href="https://T.me/DG_Haitian_nud" target="_blank">Rejoindre le PDG</a>
+</div>
+
+<!-- SOCIAL MEDIA -->
+<div class="social-links">
+<a href="https://tiktok.com/@dg_hx_officiel" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+</a>
+<a href="https://x.com/fanshaitiannudx" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X">
+</a>
+</div>
+</div>
+
+<footer>© 2026 Haitian Nud - Tous droits réservés</footer>
+
+</div>
+
+<script>
+window.onload=function(){
+setTimeout(function(){
+document.getElementById("loader").style.display="none";
+document.getElementById("main").style.display="block";
+},2000);
+}
+</script>
+
+</body>
+</html>
