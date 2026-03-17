@@ -3,123 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haitian Nud </title>
+
+<title>Haitian Network</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+<!-- ICON -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* BACKGROUND */
+
+body{
+min-height:100vh;
+background:linear-gradient(-45deg,#000000,#0a1a40,#0a58ff,#8b0000);
+background-size:400% 400%;
+animation:bgmove 12s infinite;
+color:white;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
 /* LOADER */
+
 #loader{
-position:fixed;width:100%;height:100vh;
-background:#0f0f0f;display:flex;justify-content:center;align-items:center;flex-direction:column;
-color:white;z-index:9999;
+position:fixed;
+width:100%;
+height:100vh;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
 }
-.loader-circle{
-width:60px;height:60px;
-border:6px solid #333;border-top:6px solid #00ffcc;
-border-radius:50%;animation:spin 1s linear infinite;
+
+.loader{
+width:60px;
+height:60px;
+border:6px solid #222;
+border-top:6px solid #0a58ff;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
-@keyframes spin{100%{transform:rotate(360deg);}}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
 
 /* MAIN */
+
 #main{
 display:none;
-min-height:100vh;
-background:linear-gradient(135deg,#0f0f0f,#1c1c1c);
-color:white;padding-bottom:40px;
+padding:30px 20px;
+max-width:420px;
+margin:auto;
 }
 
 /* HEADER */
-header{text-align:center;padding:40px 20px 20px;}
-header img{
-width:70px;
-max-width:70px;
-height:auto;
-border-radius:50%;
-border:2px solid #00ffcc;
-margin-bottom:15px;
+
+header{
+text-align:center;
+margin-bottom:25px;
 }
-header h1{font-size:26px;font-weight:700;color:#00ffcc;}
-header p{margin-top:8px;font-size:14px;color:#bbb;max-width:280px;margin:auto;}
+
+header img{
+width:90px;
+border-radius:50%;
+border:3px solid white;
+box-shadow:0 0 15px #0a58ff;
+margin-bottom:12px;
+}
+
+header h1{
+font-size:28px;
+font-weight:700;
+}
+
+header p{
+font-size:14px;
+opacity:0.8;
+margin-top:5px;
+}
 
 /* SECTION */
-.section{margin-top:30px;padding:0 20px;}
-.section h2{text-align:center;margin-bottom:12px;font-size:18px;color:#00ffcc;}
 
-/* LINKS */
-.link-box{display:flex;flex-direction:column;gap:10px;}
+.section{
+margin-top:30px;
+}
+
+.section h2{
+text-align:center;
+margin-bottom:15px;
+font-size:18px;
+}
+
+/* BUTTON BLAN */
+
+.link-box{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
 .link-box a{
 text-decoration:none;
-padding:12px;
-border-radius:8px;
-background:#1f1f1f;
+padding:15px;
+border-radius:12px;
 text-align:center;
-color:white;
-font-weight:500;
-transition:0.3s ease;
-border:1px solid #333;
+color:#000;
+background:#fff;
+font-weight:600;
+border:1px solid #ddd;
+transition:0.3s;
 }
+
 .link-box a:hover{
-background:#00ffcc;
-color:black;
 transform:scale(1.05);
+background:linear-gradient(45deg,#0a58ff,#ff2d2d);
+color:#fff;
+box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
 
 /* SOCIAL */
-.social-links{
-margin-top:25px;
+
+.social{
+margin-top:20px;
 display:flex;
 justify-content:center;
-gap:25px;
+gap:20px;
 }
-.social-links a{
-background:#1f1f1f;
-padding:10px;
+
+.social a{
+width:50px;
+height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
 border-radius:50%;
-border:1px solid #333;
-transition:0.3s ease;
+background:rgba(0,0,0,0.6);
+border:1px solid rgba(255,255,255,0.3);
+transition:0.3s;
 }
-.social-links a:hover{
-background:#00ffcc;
-transform:scale(1.1);
+
+.social a:hover{
+transform:scale(1.2);
+background:#ff2d2d;
 }
-.social-links img{
-width:28px;
-height:28px;
+
+.social i{
+font-size:22px;
+color:white;
 }
 
 /* FOOTER */
+
 footer{
-margin-top:30px;
 text-align:center;
+margin-top:30px;
 font-size:12px;
-color:#777;
+opacity:0.7;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
-<div class="loader-circle"></div>
-<p style="margin-top:12px;">Chargement...</p>
+<div class="loader"></div>
+<p style="margin-top:10px;">Chargement...</p>
 </div>
 
-<!-- MAIN -->
 <div id="main">
 
 <header>
-<img src="/logo.png" alt="Logo Haitian Network">
-<h1>Haitian Nud</h1>
-<p>Plateforme officielle pour rejoindre nos canaux et groupes exclusifs.</p>
+<img src="/logo.png">
+<h1>Haitian Network</h1>
+<p>Rejoignez nos canaux et groupes exclusifs</p>
 </header>
 
-<!-- CANAUX -->
 <div class="section">
-<h2>📢 Nos 3 Canaux</h2>
+<h2>📢 Nos Canaux</h2>
 <div class="link-box">
 <a href="https://t.me/hait_iannud" target="_blank">Canal Premium 1</a>
 <a href="https://t.me/hatiannud_canal" target="_blank">Canal Premium 2</a>
@@ -127,36 +204,59 @@ color:#777;
 </div>
 </div>
 
-<!-- GROUPES -->
 <div class="section">
-<h2>👥 Nos 4 Groupes</h2>
+<h2>👥 Nos Groupes</h2>
 <div class="link-box">
 <a href="https://t.me/h_aitiannud" target="_blank">Groupe VIP 1</a>
 <a href="https://t.me/+7ZVg96dLu-hhOTUx" target="_blank">Groupe VIP 2</a>
 <a href="https://t.me/+TN0f_0KDqc00ODcx" target="_blank">Groupe VIP 3</a>
-
 </div>
 </div>
 
-<!-- CONTACT PDG -->
+<div class="section">
+<h2>🌐 Réseaux Officiels</h2>
+<div class="link-box">
+<a href="https://whatsapp.com/channel/0029VbC9iNq8KMqeDjBmOW0Y" target="_blank">📲 Chaîne WhatsApp</a>
+<a href="https://www.instagram.com/dg_haitian_nud" target="_blank">📸 Instagram Officiel</a>
+</div>
+</div>
+
 <div class="section">
 <h2>⭐ Contact PDG</h2>
 <div class="link-box">
-<a href="https://T.me/DG_Haitian_nud" target="_blank">Rejoindre le PDG</a>
+<a href="https://T.me/DG_Haitian_nud" target="_blank">Contacter le PDG</a>
+</div>
 </div>
 
-<!-- SOCIAL MEDIA -->
-<div class="social-links">
+<!-- SOCIAL SEPARE -->
+<div class="section">
+<h2>📱 Suivez-nous</h2>
+
+<div class="social">
+
 <a href="https://tiktok.com/@dg_hx_officiel" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+<i class="fab fa-tiktok"></i>
 </a>
+
 <a href="https://x.com/fanshaitiannudx" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X">
+<i class="fab fa-x-twitter"></i>
 </a>
-</div>
+
+<a href="https://www.instagram.com/dg_haitian_nud" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://whatsapp.com/channel/0029VbC9iNq8KMqeDjBmOW0Y" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
+
 </div>
 
-<footer>© 2026 Haitian Nud - Tous droits réservés</footer>
+</div>
+
+<footer>
+© 2026 Haitian Network
+</footer>
 
 </div>
 
@@ -165,7 +265,7 @@ window.onload=function(){
 setTimeout(function(){
 document.getElementById("loader").style.display="none";
 document.getElementById("main").style.display="block";
-},2000);
+},1500);
 }
 </script>
 
