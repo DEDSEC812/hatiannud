@@ -1,50 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<title>Admin haitian nud </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Haitian Nud</title>
 
 <style>
 body{
-font-family:Poppins;
-background:#0f172a;
-color:white;
-padding:20px;
+  font-family:Poppins;
+  background:#0f172a;
+  color:white;
+  padding:20px;
 }
-
 h2{margin-top:20px}
-
 input,select,button{
-padding:12px;
-margin:5px 0;
-width:100%;
-border:none;
-border-radius:8px;
+  padding:12px;
+  margin:5px 0;
+  width:100%;
+  border:none;
+  border-radius:8px;
 }
-
 .add{background:#0a58ff;color:white;}
 .delete{background:red;color:white;}
 .edit{background:orange;color:black;}
-
 .card{
-background:#1e293b;
-padding:12px;
-margin-top:10px;
-border-radius:10px;
+  background:#1e293b;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
 }
-
 small{opacity:0.6}
 </style>
-
 </head>
-
 <body>
 
-<script>
-let pass = prompt("Admin Password ?");
-if(pass !== "admin123"){
-document.body.innerHTML="<h2>❌ Access denied</h2>";
-}
-</script>
+<!-- Div pou prompt modpas -->
+<div id="auth"></div>
+
+<!-- Tout admin content la, kache jiskaske modpas kòrèk -->
+<div id="admin" style="display:none;">
 
 <h2>➕ Ajouter / Edit Lien</h2>
 
@@ -52,10 +46,10 @@ document.body.innerHTML="<h2>❌ Access denied</h2>";
 <input id="url" placeholder="https://...">
 
 <select id="section">
-<option value="canaux">Canaux</option>
-<option value="groupes">Groupes</option>
-<option value="reseaux">Reseaux</option>
-<option value="contact">Contact</option>
+  <option value="canaux">Canaux</option>
+  <option value="groupes">Groupes</option>
+  <option value="reseaux">Reseaux</option>
+  <option value="contact">Contact</option>
 </select>
 
 <button class="add" onclick="saveLink()">💾 Enregistrer</button>
@@ -63,15 +57,31 @@ document.body.innerHTML="<h2>❌ Access denied</h2>";
 <h2>📂 Tous les liens</h2>
 <div id="list"></div>
 
-<script>
+</div>
 
-// 🔥 METE URL API OU ISIT (Render)
-const API = "https://haitian-backend.onrender.com"; 
+<script>
+// 🔥 API URL (Render)
+const API = "https://haitian-backend.onrender.com";
 
 let editIndex = null;
 let editSection = null;
 
-// 📥 Charger done
+// 🟢 Fonksyon verifye modpas
+function askPassword(){
+  let pass = prompt("Admin Password ?");
+  if(pass === "Haitiannud1"){
+    document.getElementById("auth").style.display = "none";
+    document.getElementById("admin").style.display = "block";
+  } else {
+    alert("❌ Access denied");
+    askPassword(); // repete jiskaske modpas kòrèk
+  }
+}
+
+// rele verifye modpas
+askPassword();
+
+// 📥 Chaje done API
 async function getData(){
   try{
     let res = await fetch(`${API}/links`);
@@ -82,93 +92,85 @@ async function getData(){
   }
 }
 
-// 💾 Ajoute / Edit
+// 💾 Add / Edit
 async function saveLink(){
+  let title = document.getElementById("title").value;
+  let url = document.getElementById("url").value;
+  let section = document.getElementById("section").value;
 
-let title = document.getElementById("title").value;
-let url = document.getElementById("url").value;
-let section = document.getElementById("section").value;
+  if(!title || !url){
+    alert("⚠️ Ranpli tout chan yo");
+    return;
+  }
 
-if(!title || !url){
-alert("⚠️ Ranpli tout chan yo");
-return;
-}
+  if(editIndex !== null){
+    await fetch(`${API}/delete`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({section:editSection,index:editIndex})
+    });
+    editIndex = null;
+    editSection = null;
+  }
 
-// ✏️ Edit
-if(editIndex !== null){
-await fetch(`${API}/delete`,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({section:editSection,index:editIndex})
-});
-editIndex = null;
-editSection = null;
-}
+  await fetch(`${API}/add`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({section,title,url})
+  });
 
-// ➕ Add
-await fetch(`${API}/add`,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({section,title,url})
-});
+  // reset input
+  document.getElementById("title").value="";
+  document.getElementById("url").value="";
 
-// reset input
-document.getElementById("title").value="";
-document.getElementById("url").value="";
-
-render();
+  render();
 }
 
 // 🗑 Delete
 async function deleteLink(section,index){
-await fetch(`${API}/delete`,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({section,index})
-});
-render();
+  await fetch(`${API}/delete`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({section,index})
+  });
+  render();
 }
 
 // ✏️ Load edit
 async function editLink(section,index){
-let data = await getData();
-let link = data[section][index];
+  let data = await getData();
+  let link = data[section][index];
 
-document.getElementById("title").value = link.title;
-document.getElementById("url").value = link.url;
-document.getElementById("section").value = section;
+  document.getElementById("title").value = link.title;
+  document.getElementById("url").value = link.url;
+  document.getElementById("section").value = section;
 
-editIndex = index;
-editSection = section;
+  editIndex = index;
+  editSection = section;
 }
 
 // 🔄 Render
 async function render(){
-let data = await getData();
-let container = document.getElementById("list");
-container.innerHTML = "";
+  let data = await getData();
+  let container = document.getElementById("list");
+  container.innerHTML = "";
 
-for(let section in data){
-
-container.innerHTML += `<h3>${section.toUpperCase()}</h3>`;
-
-data[section].forEach((link,index)=>{
-container.innerHTML += `
-<div class="card">
-<b>${link.title}</b><br>
-<small>${link.url}</small><br><br>
-
-<button class="edit" onclick="editLink('${section}',${index})">✏️ Edit</button>
-<button class="delete" onclick="deleteLink('${section}',${index})">🗑 Delete</button>
-
-</div>
-`;
-});
-
+  for(let section in data){
+    container.innerHTML += `<h3>${section.toUpperCase()}</h3>`;
+    data[section].forEach((link,index)=>{
+      container.innerHTML += `
+      <div class="card">
+      <b>${link.title}</b><br>
+      <small>${link.url}</small><br><br>
+      <button class="edit" onclick="editLink('${section}',${index})">✏️ Edit</button>
+      <button class="delete" onclick="deleteLink('${section}',${index})">🗑 Delete</button>
+      </div>
+      `;
+    });
+  }
 }
 
-}
-
+// rele render premye fwa
 render();
 
 </script>
