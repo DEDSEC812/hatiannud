@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel PRO</title>
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+    }
+    
+    /* LOGIN */
+    #loginBox {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    input {
+      padding: 12px;
+      width: 250px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+    }
+    
+    button {
+      padding: 12px;
+      width: 250px;
+      border: none;
+      border-radius: 8px;
+      background: #0a58ff;
+      color: white;
+      cursor: pointer;
+    }
+    
+    /* ADMIN */
+    #adminPanel {
+      display: none;
+      padding: 20px;
+    }
+    
+    .card {
+      background: #1e293b;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    
+    .add {
+      background: #0a58ff;
+    }
+    
+    .delete {
+      background: red;
+    }
+    
+    .edit {
+      background: orange;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <!-- LOGIN -->
+  <div id="loginBox">
+    <h2>🔐 Admin Login</h2>
+    <input type="password" id="pass" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="error"></p>
+  </div>
+  
+  <!-- ADMIN -->
+  <div id="adminPanel">
+    
+    <h2>➕ Ajouter Lien</h2>
+    
+    <input id="title" placeholder="Nom">
+    <input id="url" placeholder="Lien">
+    
+    <select id="section">
+      <option value="canaux">Canaux</option>
+      <option value="groupes">Groupes</option>
+      <option value="reseaux">Réseaux</option>
+      <option value="contact">Contact</option>
+    </select>
+    
+    <button class="add" onclick="saveLink()">Save</button>
+    
+    <h2>📂 Links</h2>
+    <div id="list"></div>
+    
+  </div>
+  
+  <script>
+    const API = "https://YOUR-BACKEND.onrender.com";
+    const ADMIN_PASS = "admin123";
+    
+    let editId = null;
+    
+    /* 🔐 LOGIN SAFE */
+    function login() {
+      let pass = document.getElementById("pass").value;
+      
+      if (pass === ADMIN_PASS) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        loadData();
+      } else {
+        document.getElementById("error").innerText = "❌ Wrong password";
+      }
+    }
+    
+    /* GET DATA */
+    async function loadData() {
+      let res = await fetch(API + "/links");
+      let data = await res.json();
+      
+      let list = document.getElementById("list");
+      list.innerHTML = "";
+      
+      for (let section in data) {
+        data[section].forEach(link => {
+          list.innerHTML += `
+        <div class="card">
+          <b>${link.title}</b><br>
+          ${link.url}<br><br>
+
+          <button class="delete" onclick="del('${link._id}')">Delete</button>
+        </div>
+      `;
+        });
+      }
+    }
+    
+    /* SAVE */
+    async function saveLink() {
+      let title = document.getElementById("title").value;
+      let url = document.getElementById("url").value;
+      let section = document.getElementById("section").value;
+      
+      await fetch(API + "/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, url, section })
+      });
+      
+      loadData();
+    }
+    
+    /* DELETE */
+    async function del(id) {
+      await fetch(API + "/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+      });
+      
+      loadData();
+    }
+  </script>
+  
+</body>
+
+</html>

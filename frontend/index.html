@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Haitian Site</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* 🎯 BACKGROUND */
+body{
+background: linear-gradient(180deg,#0b0f19,#05070d);
+color:#f9fafb;
+}
+
+/* LOADER */
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:#05070d;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:999;
+}
+
+.loader{
+width:50px;
+height:50px;
+border:5px solid #222;
+border-top:5px solid #0a58ff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+/* CONTAINER */
+.container{
+max-width:420px;
+margin:auto;
+padding:25px;
+display:none;
+}
+
+/* HEADER */
+header{
+text-align:center;
+margin-bottom:30px;
+}
+
+header h1{
+font-size:28px;
+font-weight:700;
+color:#ffffff;
+}
+
+header p{
+font-size:14px;
+color:#d1d5db;
+}
+
+/* SECTION */
+.section{
+margin-top:28px;
+}
+
+.section h2{
+font-size:13px;
+color:#cbd5e1;
+margin-bottom:12px;
+letter-spacing:1px;
+}
+
+/* LINKS */
+.link-box{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.link-box a{
+width:100%;
+display:block;
+text-decoration:none;
+padding:15px;
+border-radius:12px;
+background:rgba(255,255,255,0.04);
+color:#ffffff;
+font-weight:600;
+border:1px solid rgba(255,255,255,0.08);
+transition:0.25s;
+word-break:break-word;
+}
+
+.link-box a:hover{
+background:#0a58ff;
+border-color:#0a58ff;
+box-shadow:0 0 10px rgba(10,88,255,0.5);
+transform:translateY(-2px);
+}
+
+/* SOCIAL */
+.social{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:18px;
+}
+
+.social a{
+width:52px;
+height:52px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+transition:0.3s;
+}
+
+.social a:hover{
+background:#0a58ff;
+transform:scale(1.1);
+}
+
+.social i{
+font-size:20px;
+color:#fff;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+margin-top:35px;
+font-size:12px;
+color:#9ca3af;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+<div class="loader"></div>
+</div>
+
+<div class="container" id="main">
+
+<header>
+<h1>ᕼᗩITIᗩᑎ ᑎᑌᗪ</h1>
+<p>Accédez à tous nos liens officiels</p>
+</header>
+
+<div class="section" id="sec-canaux">
+<h2>📢 CANAUX</h2>
+<div class="link-box" id="canaux"></div>
+</div>
+
+<div class="section" id="sec-groupes">
+<h2>👥 GROUPES</h2>
+<div class="link-box" id="groupes"></div>
+</div>
+
+<div class="section" id="sec-reseaux">
+<h2>🌐 RÉSEAUX</h2>
+<div class="link-box" id="reseaux"></div>
+</div>
+
+<div class="section" id="sec-contact">
+<h2>⭐ CONTACT</h2>
+<div class="link-box" id="contact"></div>
+</div>
+
+<!-- SOCIAL -->
+<div class="social">
+
+<a href="https://x.com/fanshaitiannudx" target="_blank">
+<i class="fab fa-x-twitter"></i>
+</a>
+
+<a href="https://tiktok.com/@dg_haitiannud" target="_blank">
+<i class="fab fa-tiktok"></i>
+</a>
+
+<a href="https://whatsapp.com/channel/0029VbC9iNq8KMqeDjBmOW0" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+</div>
+
+<footer>
+© 2026 Haitian Network
+</footer>
+
+</div>
+
+<script>
+const API = "https://YOUR-BACKEND.onrender.com";
+
+async function load(){
+try{
+
+let res = await fetch(API + "/links");
+let data = await res.json();
+
+function render(section,id,secId){
+let div = document.getElementById(id);
+let sectionDiv = document.getElementById(secId);
+
+// si pa gen done → kache
+if(!data[section] || data[section].length === 0){
+sectionDiv.style.display = "none";
+return;
+}
+
+data[section].forEach(link=>{
+div.innerHTML += `
+<a href="${link.url}" target="_blank">
+🔗 ${link.title}
+</a>`;
+});
+}
+
+render("canaux","canaux","sec-canaux");
+render("groupes","groupes","sec-groupes");
+render("reseaux","reseaux","sec-reseaux");
+render("contact","contact","sec-contact");
+
+// retire loader
+document.getElementById("loader").style.display="none";
+document.getElementById("main").style.display="block";
+
+}catch(e){
+document.getElementById("loader").innerHTML="❌ Erreur connexion API";
+}
+}
+
+load();
+</script>
+
+</body>
+</html>
