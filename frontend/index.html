@@ -5,31 +5,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-adsense-account" content="ca-pub-7735238596339245">
-  
-<title>Haitian nud</title>
+
+<title>Haitian Nud</title>
+
+<!-- SEO -->
+<meta name="description" content="Haitian Nud se yon platfòm ki bay aksè ak tout chanèl, gwoup ak rezo ofisyèl yo an yon sèl kote.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Haitian Nud">
+<meta property="og:description" content="Accédez à tous nos liens officiels facilement.">
+<meta property="og:image" content="https://i.ibb.co/qMpjzktT/file-000000006c3871f7b86d6df26012b507.png">
+<meta property="og:url" content="https://haitiannud.vercel.app">
+<meta property="og:type" content="website">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Haitian Nud">
+<meta name="twitter:description" content="Tout lyen ofisyèl yo an yon sèl kote.">
+<meta name="twitter:image" content="https://i.ibb.co/qMpjzktT/file-000000006c3871f7b86d6df26012b507.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Vercel Analytics -->
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-/* 🎯 BACKGROUND */
 body{
 background: linear-gradient(180deg,#0b0f19,#05070d);
 color:#f9fafb;
 }
 
-/* LOADER */
 #loader{
 position:fixed;
 width:100%;
@@ -50,11 +57,8 @@ border-radius:50%;
 animation:spin 1s linear infinite;
 }
 
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
+@keyframes spin{100%{transform:rotate(360deg);}}
 
-/* CONTAINER */
 .container{
 max-width:420px;
 margin:auto;
@@ -62,11 +66,7 @@ padding:25px;
 display:none;
 }
 
-/* HEADER */
-header{
-text-align:center;
-margin-bottom:30px;
-}
+header{text-align:center;margin-bottom:30px;}
 
 header h1{
 font-size:28px;
@@ -79,10 +79,7 @@ font-size:14px;
 color:#d1d5db;
 }
 
-/* SECTION */
-.section{
-margin-top:28px;
-}
+.section{margin-top:28px;}
 
 .section h2{
 font-size:13px;
@@ -91,7 +88,6 @@ margin-bottom:12px;
 letter-spacing:1px;
 }
 
-/* LINKS */
 .link-box{
 display:flex;
 flex-direction:column;
@@ -119,7 +115,6 @@ box-shadow:0 0 10px rgba(10,88,255,0.5);
 transform:translateY(-2px);
 }
 
-/* SOCIAL */
 .social{
 margin-top:35px;
 display:flex;
@@ -149,20 +144,17 @@ font-size:20px;
 color:#fff;
 }
 
-/* FOOTER */
 footer{
 text-align:center;
 margin-top:35px;
 font-size:12px;
 color:#9ca3af;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
 <div class="loader"></div>
 </div>
@@ -194,21 +186,10 @@ color:#9ca3af;
 <div class="link-box" id="contact"></div>
 </div>
 
-<!-- SOCIAL -->
 <div class="social">
-
-<a href="https://x.com/fanshaitiannudx" target="_blank">
-<i class="fab fa-x-twitter"></i>
-</a>
-
-<a href="https://tiktok.com/@dg_haitiannud" target="_blank">
-<i class="fab fa-tiktok"></i>
-</a>
-
-<a href="https://whatsapp.com/channel/0029VbC9iNq8KMqeDjBmOW0" target="_blank">
-<i class="fab fa-whatsapp"></i>
-</a>
-
+<a href="https://x.com/fanshaitiannudx" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://tiktok.com/@dg_haitiannud" target="_blank"><i class="fab fa-tiktok"></i></a>
+<a href="https://whatsapp.com/channel/0029VbC9iNq8KMqeDjBmOW0" target="_blank"><i class="fab fa-whatsapp"></i></a>
 </div>
 
 <footer>
@@ -222,7 +203,6 @@ const API = "https://hatiannud-2.onrender.com";
 
 async function load(){
 try{
-
 let res = await fetch(API + "/links");
 let data = await res.json();
 
@@ -230,7 +210,6 @@ function render(section,id,secId){
 let div = document.getElementById(id);
 let sectionDiv = document.getElementById(secId);
 
-// si pa gen done → kache
 if(!data[section] || data[section].length === 0){
 sectionDiv.style.display = "none";
 return;
@@ -249,7 +228,6 @@ render("groupes","groupes","sec-groupes");
 render("reseaux","reseaux","sec-reseaux");
 render("contact","contact","sec-contact");
 
-// retire loader
 document.getElementById("loader").style.display="none";
 document.getElementById("main").style.display="block";
 
