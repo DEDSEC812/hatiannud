@@ -41,9 +41,9 @@ export function Home() {
         
         <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 lg:p-24 container mx-auto">
           <div className="max-w-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <Badge className="mb-4 bg-primary/20 text-primary hover:bg-primary/30 border-primary/30 backdrop-blur-sm">Nouveau sur Haïtien Nud</Badge>
+            <Badge className="mb-4 bg-primary/20 text-primary hover:bg-primary/30 border-primary/30 backdrop-blur-sm">Nouveau sur HAITIAN NUD</Badge>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-8 leading-tight">
-              Haïtien Nud <span className="text-primary">Média</span>
+              HAITIAN <span className="text-primary">NUD</span>
             </h1>
             <div className="flex flex-wrap gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 shadow-[0_0_20px_rgba(30,94,255,0.4)]">
@@ -187,7 +187,6 @@ export function Home() {
   );
 }
 
-// Minimal Badge implementation since it wasn't exported in the components.json
 function Badge({ children, className, variant = "default" }: any) {
   return (
     <div className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`}>

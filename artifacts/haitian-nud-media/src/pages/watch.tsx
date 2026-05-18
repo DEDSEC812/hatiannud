@@ -41,7 +41,7 @@ function VipGate() {
             rel="noopener noreferrer"
           >
             <Button size="sm" className="bg-primary hover:bg-primary/90 text-white gap-2">
-              <Send className="h-3.5 w-3.5" /> {link.label}
+              <Send className="h-3.5 w-3.5" /> klike la pouw voye zen
             </Button>
           </a>
         ))}
@@ -112,7 +112,7 @@ export function Watch() {
     const url = window.location.href;
     if (navigator.share) {
       try {
-        await navigator.share({ title: video?.title || "Haïtien Nud Média", url });
+        await navigator.share({ title: video?.title || "HAITIAN NUD", url });
       } catch { /* cancelled */ }
     } else {
       try {
@@ -201,7 +201,6 @@ export function Watch() {
               </div>
             )}
 
-            {/* Fake Controls (non-VIP only) */}
             {!video.isVip && (
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="w-full h-1 bg-white/20 rounded-full mb-4 overflow-hidden">
@@ -275,7 +274,7 @@ export function Watch() {
                   {TELEGRAM_LINKS.map((link) => (
                     <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
                       <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold gap-1.5">
-                        <Send className="h-3.5 w-3.5" /> {link.label}
+                        <Send className="h-3.5 w-3.5" /> klike la pouw voye zen
                       </Button>
                     </a>
                   ))}
@@ -418,10 +417,11 @@ export function Watch() {
             </h4>
             <div className="space-y-2">
               {TELEGRAM_LINKS.map((link) => (
-                <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-between text-xs py-2 px-3 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-colors">
-                  <span className="text-muted-foreground">{link.label}</span>
-                  <span className="text-primary font-medium">Rejoindre →</span>
+                <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+                  <Button size="sm" variant="outline" className="w-full justify-between border-border hover:border-primary/40 hover:bg-primary/5 text-xs">
+                    <span className="text-muted-foreground">{link.label}</span>
+                    <span className="text-primary font-medium">klike la pouw voye zen →</span>
+                  </Button>
                 </a>
               ))}
             </div>

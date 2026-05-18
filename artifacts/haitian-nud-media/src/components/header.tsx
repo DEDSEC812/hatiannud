@@ -23,7 +23,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] sm:w-[400px] border-r-border">
               <SheetHeader>
-                <SheetTitle className="text-left font-serif text-xl">Haïtien Nud Média</SheetTitle>
+                <SheetTitle className="text-left font-serif text-xl">HAITIAN NUD</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4 mt-8">
                 <Link href="/" className="flex items-center gap-3 px-2 py-2 text-lg hover:text-primary transition-colors">
@@ -61,7 +61,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2">
             <img src={`${basePath}/logo.jpg`} alt="Logo" className="h-8 w-8 rounded object-cover" />
             <span className="font-serif font-bold text-xl tracking-tight hidden sm:inline-block">
-              Haitiannud
+              HAITIAN NUD
             </span>
           </Link>
         </div>

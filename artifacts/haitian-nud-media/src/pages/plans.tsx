@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Send, Star, Users, MessageCircle, Lock } from "lucide-react";
+import { Send, Star, MessageCircle, Lock } from "lucide-react";
 
 const TELEGRAM_LINKS = [
   { label: "Groupe 1", url: "https://t.me/dg_haitiannud", desc: "Groupe principal" },
@@ -52,8 +52,8 @@ export function Plans() {
                     <div className="text-xs text-muted-foreground">{link.desc}</div>
                   </div>
                 </div>
-                <Button size="sm" className="bg-primary text-white hover:bg-primary/90 shrink-0">
-                  Rejoindre
+                <Button size="sm" className="bg-primary text-white hover:bg-primary/90 shrink-0 gap-1.5">
+                  <Send className="h-3.5 w-3.5" /> klike la pouw voye zen
                 </Button>
               </a>
             ))}
@@ -83,7 +83,7 @@ export function Plans() {
       </div>
 
       <div className="mt-12 text-center text-sm text-muted-foreground">
-        <p>Le système de paiement Stripe sera bientôt disponible. Merci de votre patience.</p>
+        <p>Le système de paiement sera bientôt disponible. Merci de votre patience.</p>
       </div>
     </div>
   );
