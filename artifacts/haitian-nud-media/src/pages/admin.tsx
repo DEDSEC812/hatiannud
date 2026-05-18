@@ -9,17 +9,11 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Shield, Users, Video, DollarSign, Download, Ticket, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
-
-const CONTENT_TYPES = [
-  "Vidéo", "Photo", "Kompa", "Rasin", "Dancehall", "Zouk", "Rara",
-  "Vodou", "Rap", "Trap", "Afrobeat", "Autres",
-];
 
 const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from({ length: CURRENT_YEAR - 2009 }, (_, i) => String(CURRENT_YEAR - i));
@@ -94,7 +88,7 @@ function VideosTab({ queryClient }: { queryClient: any }) {
   const createVideo = useAdminCreateVideo();
   const deleteVideo = useAdminDeleteVideo();
 
-  const [contentType, setContentType] = useState("Vidéo");
+  const [contentType, setContentType] = useState("");
   const [year, setYear] = useState(String(CURRENT_YEAR));
   const [formData, setFormData] = useState({
     title: "",
@@ -150,33 +144,28 @@ function VideosTab({ queryClient }: { queryClient: any }) {
                 <Input required value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} />
               </div>
 
-              {/* Category = Type + Year */}
+              {/* Category = Type (free text) + Year */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Type de contenu</Label>
-                  <Select value={contentType} onValueChange={setContentType}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choisir le type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CONTENT_TYPES.map(t => (
-                        <SelectItem key={t} value={t}>{t}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Label>Catégorie</Label>
+                  <Input
+                    required
+                    placeholder="ex: Kompa, Rasin, Trap..."
+                    value={contentType}
+                    onChange={e => setContentType(e.target.value)}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label>Année</Label>
-                  <Select value={year} onValueChange={setYear}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Année" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {YEARS.map(y => (
-                        <SelectItem key={y} value={y}>{y}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <select
+                    value={year}
+                    onChange={e => setYear(e.target.value)}
+                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-ring"
+                  >
+                    {YEARS.map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 

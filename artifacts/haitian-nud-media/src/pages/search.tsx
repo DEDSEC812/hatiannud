@@ -45,7 +45,7 @@ export function Search() {
           </div>
           <Input
             type="search"
-            placeholder="Artiste, titre, catégorie..."
+            placeholder="chache zen"
             className="pl-10 h-12 bg-card border-border text-lg rounded-full shadow-sm focus-visible:ring-primary"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
