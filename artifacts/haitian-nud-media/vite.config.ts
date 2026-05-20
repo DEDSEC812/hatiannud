@@ -1,16 +1,10 @@
-vite.config.ts sa a fèt pou [Replit](https://replit.com?utm_source=chatgpt.com), pa pou [Vercel](https://vercel.com?utm_source=chatgpt.com).
-
-Ou bezwen retire obligasyon PORT ak BASE_PATH.
-
-Ranplase tout fichye a ak vèsyon sa a:
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-const port = Number(process.env.PORT) || 5173;
+const port = Number(process.env.PORT) || 8080;
 
 const basePath = process.env.BASE_PATH || "/";
 
