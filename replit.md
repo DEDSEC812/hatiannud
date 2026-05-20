@@ -12,7 +12,7 @@ Plateforme haïtienne de médias adultes (vidéos, photos) avec accès libre et 
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string
 - Required env: `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY` — Clerk auth
-- Required env: `ADMIN_EMAILS` — comma-separated admin emails (e.g. haistream1234@gmail.com)
+- Required env: `ADMIN_EMAILS` — comma-separated admin emails (e.g. dghaitiannud@gmail.com)
 
 ## Stack
 
@@ -41,7 +41,7 @@ Plateforme haïtienne de médias adultes (vidéos, photos) avec accès libre et 
 - VIP videos: `videoUrl` is stripped from public API responses for non-VIP users; users are redirected to Telegram links instead of a paywall
 - Plans page: replaced with "Coming Soon" + 4 Telegram community links (no Stripe integration)
 - Download limit: 3 per day (FREE_DOWNLOAD_LIMIT = 3)
-- Admin detection: via ADMIN_EMAILS env var, checked at user creation/first login
+- Admin detection: via ADMIN_EMAILS env var, checked and synced on every login
 - Clerk proxy: all Clerk requests proxied through /api/__clerk to avoid CORS issues
 
 ## Product
@@ -55,7 +55,7 @@ Plateforme haïtienne de médias adultes (vidéos, photos) avec accès libre et 
 
 ## User preferences
 
-- Admin email: haistream1234@gmail.com (set via ADMIN_EMAILS env var)
+- Admin email: dghaitiannud@gmail.com (set via ADMIN_EMAILS env var)
 - Telegram links:
   - Groupe 1: https://t.me/dg_haitiannud
   - Groupe 2: https://t.me/+UXtFEcF2Dw8zNGYx

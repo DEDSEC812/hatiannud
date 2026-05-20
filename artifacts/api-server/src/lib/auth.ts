@@ -10,16 +10,35 @@ export interface AuthedRequest extends Request {
   user?: typeof usersTable.$inferSelect;
 }
 
+function getAdminEmails(): string[] {
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 export async function ensureUser(userId: string) {
   const existing = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
   if (existing[0]) {
-    if (existing[0].subscriptionEndsAt && existing[0].subscriptionEndsAt < new Date() && existing[0].plan === "vip") {
-      const [downgraded] = await db
+    const adminEmails = getAdminEmails();
+    const shouldBeAdmin = adminEmails.includes(existing[0].email.toLowerCase());
+    const needsVipDowngrade =
+      existing[0].subscriptionEndsAt &&
+      existing[0].subscriptionEndsAt < new Date() &&
+      existing[0].plan === "vip";
+
+    // Sync admin flag on every login + handle VIP expiry
+    if (shouldBeAdmin !== existing[0].isAdmin || needsVipDowngrade) {
+      const updates: Partial<typeof usersTable.$inferInsert> = {};
+      if (shouldBeAdmin !== existing[0].isAdmin) updates.isAdmin = shouldBeAdmin;
+      if (needsVipDowngrade) updates.plan = "free";
+
+      const [updated] = await db
         .update(usersTable)
-        .set({ plan: "free" })
+        .set(updates)
         .where(eq(usersTable.id, userId))
         .returning();
-      return downgraded;
+      return updated;
     }
     return existing[0];
   }
@@ -34,10 +53,7 @@ export async function ensureUser(userId: string) {
     // ignore — fallback to placeholders
   }
 
-  const adminEmails = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
+  const adminEmails = getAdminEmails();
   const isAdmin = adminEmails.includes(email.toLowerCase());
 
   const [created] = await db
@@ -46,7 +62,18 @@ export async function ensureUser(userId: string) {
     .onConflictDoNothing()
     .returning();
   if (created) return created;
+
+  // Race condition fallback: user was created between our SELECT and INSERT
   const [again] = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
+  // Still sync admin status for the fallback case
+  if (again && adminEmails.includes(again.email.toLowerCase()) !== again.isAdmin) {
+    const [fixed] = await db
+      .update(usersTable)
+      .set({ isAdmin: adminEmails.includes(again.email.toLowerCase()) })
+      .where(eq(usersTable.id, userId))
+      .returning();
+    return fixed;
+  }
   return again!;
 }
 
