@@ -23,8 +23,8 @@ export function Admin() {
   const queryClient = useQueryClient();
 
   if (isLoadingMe) return <div className="p-8 text-center">Chargement...</div>;
-  if (!me?.isAdmin) return (
-    <div className="p-24 text-center">
+
+if (!me?.isAdmin && !(me as any)?.publicMetadata?.isAdmin) return (
       <Shield className="h-16 w-16 mx-auto text-destructive mb-4" />
       <h1 className="text-3xl font-bold">Accès Refusé</h1>
       <p className="text-muted-foreground mt-2">Vous n'avez pas les droits d'administration.</p>
@@ -298,4 +298,4 @@ function AdminAlerts() {
       </CardContent>
     </Card>
   );
-}
+      }
