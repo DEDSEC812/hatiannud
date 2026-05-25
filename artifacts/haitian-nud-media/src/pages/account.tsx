@@ -141,11 +141,16 @@ export function Account() {
                 )}
 
                 {(user?.publicMetadata?.isAdmin === true || me?.isAdmin) && (
-                    <Button variant="outline" className="w-full bg-accent/50 border-primary/30 text-primary">
-                      <Shield className="h-4 w-4 mr-2" /> Panneau Admin
-                    </Button>
-                  </Link>
-                )}
+  <Link href="/admin" className="w-full mt-4">
+    <Button
+      variant="outline"
+      className="w-full bg-accent/50 border-primary/30 text-primary"
+    >
+      <Shield className="h-4 w-4 mr-2" />
+      Panneau Admin
+    </Button>
+  </Link>
+)}
               </div>
             </CardContent>
             <CardFooter className="border-t border-border pt-4 flex justify-center">
