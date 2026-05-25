@@ -140,8 +140,7 @@ export function Account() {
                   <Badge variant="outline" className="mb-2">Membre Gratuit</Badge>
                 )}
 
-                {me?.isAdmin && (
-                  <Link href="/admin" className="w-full mt-4">
+                {(user?.publicMetadata?.isAdmin === true || me?.isAdmin) && (
                     <Button variant="outline" className="w-full bg-accent/50 border-primary/30 text-primary">
                       <Shield className="h-4 w-4 mr-2" /> Panneau Admin
                     </Button>
